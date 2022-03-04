@@ -2,11 +2,13 @@ import requests
 import traceback
 import sys
 import json
+import re
 
+#todo document the types of all of these keys
+stack_data_keys = ['tags', 'comments', 'answers', 'owner', 'delete_vote_count', 'reopen_vote_count', 'close_vote_count',
+                   'is_answered', 'view_count', 'favorite_count', 'accepted_answer_id', 'answer_count', 'score',
+                   'last_activity_date', 'creation_date', 'last_edit_date', 'question_id', 'link', 'title', 'body']
 
-stack_data_keys = ['tags', 'owner', 'is_answered', 'view_count', 'accepted_answer_id', 'answer_count', 'score',
-                   'last_activity_date', 'creation_date', 'last_edit_date', 'question_id', 'content_license', 'link',
-                   'title']
 
 '''
 This is a class which searches and returns information about queries to stack overflow. 
@@ -24,7 +26,6 @@ class StackOverflowAPI():
         exc_type, exc_value, exc_tb = sys.exc_info()
         tb = traceback.TracebackException(exc_type, exc_value, exc_tb)
         self.search(''.join(tb.format_exception_only()))
-
         #TODO ADD THE INFO NEEDED TO THE STACKTRACE AND THEN RERAISE THE EXCEPTION WITH THE INFO ATTACHED
 
 
@@ -43,18 +44,12 @@ class StackOverflowAPI():
             "intitle": search_string,
             "order": "desc",
             "sort": "votes",
-            "tagged": "python"
+            "tagged": "python",
+            "filter": "!-MBrU_IzpJ5H-AG6Bbzy.X-BYQe(2v-.J"
         }
         r = requests.get(url, params=params)
         self.meta_data = {"Status Code": r.status_code, "API URL": r.url, "HEADERS": r.headers}
         self.stack_data = list(json.loads(r.content)['items'])[0]
-
-        #TODO GET THIS TO WORK SO THAT WE CAN GET THE QUESTION ITSELF IN OUR STACKTRACE
-        url_answers = self.BASEURL + "questions/{"+ str(self.stack_data['question_id'])+ ";}/answers"
-        print(url_answers)
-        r = requests.get(url_answers)
-        print(r)
-        #print(self.stack_data)
 
 
     # gets the title to the post searched
@@ -62,9 +57,8 @@ class StackOverflowAPI():
         return self.stack_data['title']
 
     #gets the content written by the author of the post, usually describing the problem they are facing.
-    def get_content(self):
-        return None
-        #todo get the content of the post from self.stack_data
+    def get_question(self):
+        return self.stack_data["body"]
 
     #returns the URL of the stack overflow post searched
     def get_url(self):
@@ -72,9 +66,14 @@ class StackOverflowAPI():
 
     #returns all of the comments underneath the post searched.
     def get_comments(self):
-        return None
-        #todo return the comments under the post via information in self.stack_data
+        return self.stack_data["comments"][0]
 
+    def get_answer(self):
+        return self.stack_data["answers"][0]["body"]
+
+    def _cleanhtml_(self, raw_html, cleaner=re.compile('<.*?>')):
+        cleantext = re.sub(cleaner, '', raw_html)
+        return cleantext
 
 
 
