@@ -1,6 +1,6 @@
 # PythonStackOverFlow
 
-By importing this StackOverFlowAPI class, you are able to get direct error analysis on the problem you are facing at hand without having to open up another tab and copy and paste the error. There are plenty of functions such as ``` get_title() ``` ``` get_question() ``` ```get_url() ``` ``` get_comments() ``` ```get_answer() ``` that can help you further identify help from StackOverFlow.
+By importing this StackOverFlowAPI class, you are able to get direct error analysis on the problem you are facing at hand without having to open up another tab and copy and paste the error. There are plenty of functions such as ```get_title()``` ``` get_question()``` ```get_url()``` ```get_comments()``` ```get_answer()``` that can help you further identify help from StackOverFlow.
 
 ![alt text](doc/diagram.jpg)
 
