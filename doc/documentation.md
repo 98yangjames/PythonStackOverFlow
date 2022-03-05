@@ -1,12 +1,12 @@
 # PythonStackOverFlowAPI Documentation
 
-##Requirements
+**Requirements**
 
-##Design
+**Design**
 
-##Usage Guidelines
+**Usage Guidelines**
 
-##Extensibility
+**Extensibility**
 
 
 
