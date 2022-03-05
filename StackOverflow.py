@@ -91,3 +91,10 @@ class StackOverflowAPI():
     # removes all the HTML elements from a string, helps us clean the commments and questions which come in HTML form
     def _cleanhtml_(self, raw_html, cleaner=re.compile('<.*?>')):
         return re.sub(cleaner, '', raw_html).strip()
+
+try:
+    a = 1
+    b = 0
+    c = a/b
+except Exception as e:
+    StackOverflowAPI(e)
