@@ -3,7 +3,7 @@ import traceback
 import sys
 import json
 import re
-
+import warnings
 # todo document the types of all of these keys
 stack_data_keys = ['tags', 'comments', 'answers', 'owner', 'delete_vote_count', 'reopen_vote_count', 'close_vote_count',
                    'is_answered', 'view_count', 'favorite_count', 'accepted_answer_id', 'answer_count', 'score',
@@ -25,6 +25,9 @@ class StackOverflowAPI():
         self.stack_data = {}
         exc_type, exc_value, exc_tb = sys.exc_info()
         tb = traceback.TracebackException(exc_type, exc_value, exc_tb)
+        if(tb.exc_type == None):
+            warnings.warn("Currently no exception being raised", RuntimeWarning)
+            return
         self.search(''.join(tb.format_exception_only()))
         raise type(exception)("\n \033[93m ----STACK OVERFLOW INFORMATION FROM LOOKUP----\033[0m \n " +
                               "\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" +
@@ -50,6 +53,7 @@ class StackOverflowAPI():
         r = requests.get(url, params=params)
         self.meta_data = {"Status Code": r.status_code, "API URL": r.url, "HEADERS": r.headers}
         self.stack_data = list(json.loads(r.content)['items'])[0]
+        print(self.stack_data)
 
     # gets the title to the post searched
     def get_title(self):
@@ -86,11 +90,4 @@ class StackOverflowAPI():
         return re.sub(cleaner, '', raw_html).strip()
 
 
-# this is an example of how our code will be used
 
-a = 1
-b = 0
-try:
-    c = a / b
-except Exception as e:
-    a = StackOverflowAPI(e)  # for now this does nothing with the exception
