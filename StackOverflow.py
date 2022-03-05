@@ -92,9 +92,3 @@ class StackOverflowAPI():
     def _cleanhtml_(self, raw_html, cleaner=re.compile('<.*?>')):
         return re.sub(cleaner, '', raw_html).strip()
 
-try:
-    a = 1
-    b = 0
-    c = a/b
-except Exception as e:
-    StackOverflowAPI(e)
