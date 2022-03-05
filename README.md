@@ -38,24 +38,6 @@ ZeroDivisionError                         Traceback (most recent call last)
 
 ZeroDivisionError: division by zero
 
-Thus, I want to ask, how to avoid that error in python. My desired output is z = 0 
- ANSWER GIVEN:  
-Catch the error and handle it:
-try:
-    z = x / y
-except ZeroDivisionError:
-    z = 0
-
-Or check before you do the division:
-if y == 0:
-    z = 0
-else:
-    z = x / y
-
-The latter can be reduced to:
-z = 0 if y == 0 else (x / y) 
-
-Or if you're sure y is a number, which implies it`s truthy if nonzero:
-z = (x / y) if y else 0
-z = y and (x / y)   # alternate version 
-```
+....
+....
+....
