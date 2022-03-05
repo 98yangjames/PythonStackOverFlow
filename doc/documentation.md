@@ -1,7 +1,7 @@
 # PythonStackOverFlowAPI Documentation
 
-**Requirements**
-PythonStackOverFlow doesn't require any dependencies. All imports should be built in already. \
+**Requirements** <br>
+PythonStackOverFlow doesn't require any dependencies. All imports should be built in already.
 ```
 import requests
 import traceback
