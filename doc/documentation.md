@@ -51,6 +51,7 @@ The getter functions are: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;-The request status (200/400/404/etc) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;-The API url hit beginning with self.API_URL <br>
 &nbsp;&nbsp;&nbsp;&nbsp;-The headers sent with the request. <br>
+```_cleanhtml_(raw_html)``` which deletes the HTML elements from the string to print for the user in a cleaner fashion. <br>
 ## Extensibility <br>
 
 
