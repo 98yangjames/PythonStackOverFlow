@@ -14,7 +14,7 @@ import warnings
 Tested on Python 3.8 env.
 
 ## Design <br>
-When programming, it's a common procedure to look up an error that you are facing when y ou don't know hwat is inherently wrong with your code. It is time consuming to open up a new tab, find the right StackOverFlow page and switch back from your editor to the tab to implement that solution. StackOverFlowAPI is the solution to this problem. To make the functionality as clean as possible, we wanted the design to avoid dependencies.  <br>
+When programming, it's a common procedure to look up an error that you are facing when you don't know what is inherently wrong with your code. It is time consuming to open up a new tab, find the right StackOverFlow page and switch back from your editor to the tab to implement that solution. StackOverFlowAPI is a solution to this problem. To make the functionality as clean as possible, we wanted the design to avoid dependencies.  <br>
 
 Within the code, the auto-lookup will nest around the code as such:
 ```
@@ -24,6 +24,16 @@ If name == “__main__”:
 	Except(e)
 		StackOverflowAPI(e)
 ```
+The goal of this was to create a simple error display where users can access information within StackOverFlow nested in a try, except format. Currently, the getter functions can pull the following values:
+``` def search(self, search_string) ``` which will input the following params into StackExchange:
+``` params = {
+            "site": "stackoverflow",
+            "intitle": search_string,
+            "order": "desc",
+            "sort": "votes",
+            "tagged": "python",
+            "filter": "!-MBrU_IzpJ5H-AG6Bbzy.X-BYQe(2v-.J"
+        } ```
 
 
 ## Extensibility <br>
