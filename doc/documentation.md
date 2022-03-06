@@ -39,7 +39,7 @@ The ```site:``` needs to reference stackoverflow. <br>
 The ```title:``` is the given error in the form of a string <br>
 The ```order:``` is what order the information is given. In this case, we want it to be descending because ascending gives the oldest answer rather than the newest. <br>
 The ```tagged:``` is Python answers because this functionality is built for Python and not other languages. <br>
-The ```filter: ``` is a specific filter for StackExchange that gives the body of the answers. (https://stackapps.com/questions/4213/get-questions-with-body-and-answers) <br>
+The ```filter:``` is a specific filter for StackExchange that gives the body of the answers. (https://stackapps.com/questions/4213/get-questions-with-body-and-answers) <br>
 
 ## Extensibility <br>
 
