@@ -49,8 +49,8 @@ The getter functions are: <br>
 ```get_answer()``` which returns the answer of the question. <br>
 ```get_meta_data()``` which returns the dictionary of meta data about the API request including: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;-The request status (200/400/404/etc) <br>
--The API url hit beginning with self.API_URL <br>
--The headers sent with the request. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-The API url hit beginning with self.API_URL <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-The headers sent with the request. <br>
 ## Extensibility <br>
 
 
