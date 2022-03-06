@@ -25,7 +25,7 @@ If name == “__main__”:
 		StackOverflowAPI(e)
 ```
 The goal of this was to create a simple error display where users can access information within StackOverFlow nested in a try, except format. Currently, the getter functions can pull the following values:
-``` def search(self, search_string) ``` which will input the following params into StackExchange:
+``` def search(self, search_string) ``` which will input the following params into StackExchange: <br>
 ``` "site": "stackoverflow",
 "intitle": search_string,
 "order": "desc",
