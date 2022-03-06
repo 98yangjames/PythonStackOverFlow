@@ -31,7 +31,8 @@ The goal of this was to create a simple error display where users can access inf
 "order": "desc", 
 "sort": "votes", 
 "tagged": "python", 
-"filter": "!-MBrU_IzpJ5H-AG6Bbzy.X-BYQe(2v-.J"} ```
+"filter": "!-MBrU_IzpJ5H-AG6Bbzy.X-BYQe(2v-.J"} 
+```
 
 
 ## Extensibility <br>
