@@ -36,7 +36,8 @@ params = {"site": "stackoverflow",
 ```
 
 The ```site:``` needs to reference stackoverflow. <br>
-The ```title:``` is the given error <br>
+The ```title:``` is the given error in the form of a string <br>
+The ```order:``` is what order the information is given. In this case, we want it to be descending because ascending gives the oldest answer rather than the newest.
 
 
 ## Extensibility <br>
