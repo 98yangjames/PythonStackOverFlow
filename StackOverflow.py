@@ -4,7 +4,7 @@ import sys
 import json
 import re
 import warnings
-import pandas as pd
+
 
 
 # todo document the types of all of these keys
