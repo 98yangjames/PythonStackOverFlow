@@ -2,6 +2,7 @@ import unittest
 import StackOverflow
 import traceback
 import sys
+import warnings
 import pandas as pd
 """
 This is our StackOverflowAPI testing class which does not interact with the actual API via the internet,
@@ -22,19 +23,20 @@ class APITesting(StackOverflow.StackOverflowAPI):
         self.stack_data = {}
         exc_type, exc_value, exc_tb = sys.exc_info()
         tb = traceback.TracebackException(exc_type, exc_value, exc_tb)
+        if tb.exc_type is None:
+            warnings.warn("Currently no exception being raised", RuntimeWarning)
+            return
         self.search(''.join(tb.format_exception_only()))
 
 class TestingGetters(unittest.TestCase):
 
     def test_get_title(self):
-
         a = 1
         b = 0
         try:
             a.append("0")
         except Exception as e:
             a = getterTesting(e)
-
             print(a.get_title())
             self.assertEqual(a.get_title(), "Error python : [ZeroDivisionError: division by zero]")
 
@@ -94,12 +96,12 @@ class TestingTraceback(unittest.TestCase):
 
     #create some known error so that Stack Overflow can provide a solution within our traceback.
     #no need to check any information beyond the URL to know we got what we expected.
-    def basic_pandas_error(self):
+    def test_basic_pandas_error(self):
 
         try:
             a = pd.read_csv("notafile.csv")
         except Exception as e:
-            a = getterTesting(e)
+            a = StackOverflow.StackOverflowAPI(e)
 
             print(e)
             self.assertEqual(a, "FileNotFoundError: [Errno 2] No such file or directory: 'notafile.csv'")
@@ -111,10 +113,25 @@ class NullTest(unittest.TestCase):
         StackOverflow.StackOverflowAPI(BaseException)
         self.assertEqual(True, True)
 
-    def test_no_stack(self):
-        StackOverflow.StackOverflowAPI("duwahduwhdoawwdjawoidjawoidafhoifafw")
+    #this test creates a custom error which definitely does not exist in stack overflow, this way the API will come up
+    #blank when called with the error code. In this scenario we want our file to fail gracefully, allow the error
+    #to pop up as is, with all getters returning empty results and not causing crashes.
+    def test_no_stack_all_empty_getters(self):
+        class pbaspdibfgapsdsjdbg_error(Exception):
+            pass
+        try:
+            raise pbaspdibfgapsdsjdbg_error()
+        except Exception as e:
+            a = APITesting(e)
+            self.assertEqual(a.get_answer(), "")
+            self.assertEqual(a.get_url(), "")
+            self.assertEqual(a.get_title(), "")
+            self.assertEqual(a.get_comments(), [])
+            self.assertEqual(a.get_question(), "")
         # try:
         #     raise custom_error = "fadiuwhdaisjdawdawd"
+
+#    def test_api_
 
 if __name__ == '__main__':
     unittest.main()
