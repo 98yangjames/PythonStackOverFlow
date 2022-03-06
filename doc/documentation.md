@@ -1,4 +1,5 @@
 # PythonStackOverFlow Documentation
+A summary of the StackExchange PythonStackOverFlow project.
 
 ## Requirements <br>
 PythonStackOverFlow doesn't require any dependencies. All imports should be built in already.
