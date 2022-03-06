@@ -41,6 +41,12 @@ The ```order:``` is what order the information is given. In this case, we want i
 The ```tagged:``` is Python answers because this functionality is built for Python and not other languages. <br>
 The ```filter:``` is a specific filter for StackExchange that gives the body of the answers. (https://stackapps.com/questions/4213/get-questions-with-body-and-answers) <br>
 
+The getter functions are 
+```get_title()``` which returns the title of the stack_data pulled from the search. <br>
+```get_question()``` which returns the question that was asked to StackOverFlow. <br>
+```get_url()``` which returns the URL of the stack overflow post searched as a string. <br>
+```get_comments()``` which returns all of the comments underneath the post searched as a list of strings.
+
 ## Extensibility <br>
 
 
