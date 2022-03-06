@@ -45,8 +45,12 @@ The getter functions are: <br>
 ```get_title()``` which returns the title of the stack_data pulled from the search. <br>
 ```get_question()``` which returns the question that was asked to StackOverFlow. <br>
 ```get_url()``` which returns the URL of the stack overflow post searched as a string. <br>
-```get_comments()``` which returns all of the comments underneath the post searched as a list of strings.
-
+```get_comments()``` which returns all of the comments underneath the post searched as a list of strings. <br>
+```get_answer()``` which returns the answer of the question. <br>
+```get_meta_data()``` which returns the dictionary of meta data about the API request including: <br>
+-The request status (200/400/404/etc) <br>
+-The API url hit beginning with self.API_URL <br>
+-The headers sent with the request. <br>
 ## Extensibility <br>
 
 
