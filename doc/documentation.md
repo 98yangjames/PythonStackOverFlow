@@ -35,8 +35,8 @@ params = {"site": "stackoverflow",
 "filter": "!-MBrU_IzpJ5H-AG6Bbzy.X-BYQe(2v-.J"} 
 ```
 
-The site needs to reference stackoverflow. <br>
-The title is the given error <br>
+The ```site:``` needs to reference stackoverflow. <br>
+The ```title:``` is the given error <br>
 
 
 ## Extensibility <br>
