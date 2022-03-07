@@ -58,7 +58,8 @@ This project can definitely expand into multiple avenues. It can develop into a 
 
 StackOverFlow can also potentially be integrated into different sourcing libraries that deal with error handling. Potential new Python users can interpret error statements through StackOverFlow which is in ways more contextualized english. In turn, this can help beginners understand what BaseException, ImportError, IndexError, KeyError, etc. are. <br>
 
-In terms of StackExchange, we can expand to other branches within their domain such as codegolf
+In terms of StackExchange, we can expand to other branches within their domain such as codegolf and others depicted below: <br>
+![alt text](https://github.com/98yangjames/PythonStackOverFlow/blob/main/doc/StackExchange.PNG)
 
 
 
