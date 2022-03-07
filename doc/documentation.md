@@ -56,7 +56,9 @@ The getter functions are: <br>
 
 This project can definitely expand into multiple avenues. It can develop into a broader avenue of APIs that give answers. GeeksforGeeks, Quora, and many other sources have potential APIs that the user can pull error responses from, giving them the option to choose between StackOverFlow and other resources. <br>
 
-StackOverFlow can also potentially be integrated into different sourcing libraries that deal with error handling. Potential new Python users can interpret error statements through StackOverFlow which is in ways more contextualized english. In turn, this can help beginners understand what BaseException, ImportError, IndexError, KeyError, etc. are.
+StackOverFlow can also potentially be integrated into different sourcing libraries that deal with error handling. Potential new Python users can interpret error statements through StackOverFlow which is in ways more contextualized english. In turn, this can help beginners understand what BaseException, ImportError, IndexError, KeyError, etc. are. <br>
+
+In terms of StackExchange, we can expand to other branches within their domain such as codegolf
 
 
 
