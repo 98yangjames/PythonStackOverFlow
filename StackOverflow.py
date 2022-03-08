@@ -43,11 +43,10 @@ class StackOverflowAPI():
     # PARAMS: post_chosen, a search string will most likely return more than one post, which post should be selected
     #                      is decided based on the priority that they are returned in the Stackoverflow API
     def search(self, search_string, post_chosen=0):
-        url = self.API_URL + "similar"
+        url = self.API_URL + "search"
         params = {
             "site": "stackoverflow",
-            #"intitle": search_string,
-            "title": search_string,
+            "intitle": search_string,
             "order": "desc",
             "sort": "votes",
             "tagged": "python",
@@ -59,9 +58,31 @@ class StackOverflowAPI():
             print("The attempt to request data from the StackExchange API has failed, check your internet connection.")
             return
         self.meta_data = {"Status Code": r.status_code, "API URL": r.url, "HEADERS": r.headers}
-        self.stack_data = list(json.loads(r.content)['items'])[0] if "items" in json.loads(r.content).keys() \
-                                                                     and len(list(json.loads(r.content)['items'])) > 0 \
-                                                                     else {}
+        #checking if stackexchange api actually gave us a question/answer with a link, if not, expand the search
+        if "items" in json.loads(r.content).keys() and len(list(json.loads(r.content)['items'])) > 0:
+            self.stack_data = list(json.loads(r.content)['items'])[0]
+        else:
+            #we are now expanding our search using looser parameters, this will return more general results
+            url = self.API_URL + "similar"
+            params = {
+                "site": "stackoverflow",
+                "title": search_string,
+                "order": "desc",
+                "sort": "votes",
+                "tagged": "python",
+                "filter": "!-MBrU_IzpJ5H-AG6Bbzy.X-BYQe(2v-.J"
+            }
+            try:
+                r_similar = requests.get(url, params=params)
+            except requests.exceptions.RequestException as e:
+                print(
+                    "The attempt to request data from the StackExchange API has failed, check your internet connection.")
+                return
+            if "items" in json.loads(r_similar.content).keys() and list(json.loads(r_similar.content)['items']):
+                self.stack_data = list(json.loads(r_similar.content)['items'])[0]
+            else:
+                self.stack_data = {}
+
 
     # gets the title to the post searched
     def get_title(self):
