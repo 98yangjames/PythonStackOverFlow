@@ -1,0 +1,2 @@
+#this library does not depend on any third party software, only default python 3 libraries,
+#if that changes they will be here
