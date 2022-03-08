@@ -88,6 +88,7 @@ class TestingApiConnection(unittest.TestCase):
             self.assertTrue(a.meta_data)
             self.assertTrue(a.stack_data)
 
+    #todo implement
     def test_search(self): #stack data, meta data
         self.assertEqual(True, False)
 
@@ -101,10 +102,8 @@ class TestingTraceback(unittest.TestCase):
         try:
             a = pd.read_csv("notafile.csv")
         except Exception as e:
-            a = StackOverflow.StackOverflowAPI(e)
-
-            print(e)
-            self.assertEqual(a, "FileNotFoundError: [Errno 2] No such file or directory: 'notafile.csv'")
+            a = APITesting(e)
+            self.assertEqual("How do I check whether a file exists without exceptions?", a.get_title())
 
 
 class NullTest(unittest.TestCase):
