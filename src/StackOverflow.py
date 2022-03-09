@@ -21,6 +21,7 @@ Queries StackOverflow using their API, meaning that many subsequent calls will r
 
 
 class StackOverflowAPI():
+    #todo fix the bug where nesting try catch with StackOverflowAPI() calls breaks the whole thing
     def __init__(self, exception):
         self.API_URL = "https://api.stackexchange.com/2.2/"
         self.meta_data = {}
@@ -42,6 +43,7 @@ class StackOverflowAPI():
     #                       might search stack overflow on the website.
     # PARAMS: post_chosen, a search string will most likely return more than one post, which post should be selected
     #                      is decided based on the priority that they are returned in the Stackoverflow API
+    #todo add some more parameters to increase flexibility and ease of extension\
     def search(self, search_string, post_chosen=0):
         url = self.API_URL + "search"
         params = {
@@ -113,6 +115,7 @@ class StackOverflowAPI():
         return []
 
     #returns the highest voted answer on the question searched.
+    #todo make it possible to return the second highest voted answer or the third not just the first
     def get_answer(self):
         if self.stack_data:
             return self._cleanhtml_(self.stack_data["answers"][0]["body"])

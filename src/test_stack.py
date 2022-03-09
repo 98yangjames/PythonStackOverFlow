@@ -1,5 +1,5 @@
 import unittest
-import StackOverflow
+from src import StackOverflow
 import traceback
 import sys
 import warnings
@@ -130,7 +130,7 @@ class NullTest(unittest.TestCase):
         # try:
         #     raise custom_error = "fadiuwhdaisjdawdawd"
 
-#    def test_api_
+#todo add a nested try:catch: block test with two nested calls to StackOverflow()
 
 if __name__ == '__main__':
     unittest.main()
