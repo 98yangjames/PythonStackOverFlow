@@ -6,12 +6,6 @@ import re
 import warnings
 
 
-# todo document the types of all of these keys
-stack_data_keys = ['tags', 'comments', 'answers', 'owner', 'delete_vote_count', 'reopen_vote_count', 'close_vote_count',
-                   'is_answered', 'view_count', 'favorite_count', 'accepted_answer_id', 'answer_count', 'score',
-                   'last_activity_date', 'creation_date', 'last_edit_date', 'question_id', 'link', 'title', 'body']
-
-
 '''
 This is a class which searches and returns information about queries to stack overflow.
 removing the need to search for things on a web browser by handling everything within the IDE
