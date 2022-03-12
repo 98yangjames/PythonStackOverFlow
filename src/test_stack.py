@@ -32,37 +32,68 @@ class TestingGetters(unittest.TestCase):
 
     def test_get_title(self):
         a = 1
-        b = 0
         try:
             a.append("0")
         except Exception as e:
             a = getterTesting(e)
-            print(a.get_title())
             self.assertEqual(a.get_title(), "Error python : [ZeroDivisionError: division by zero]")
 
     def test_get_url(self):
         a = 1
-        b = 0
         try:
             a.append("0")
         except Exception as e:
             a = getterTesting(e)
-            print(a.get_url())
             self.assertEqual(a.get_url(), "https://stackoverflow.com/questions/29836964/error-python-zerodivisionerror-division-by-zero")
 
 
     def test_get_comments(self):
         a = 1
-        b = 0
         try:
             a.append("0")
         except Exception as e:
             a = getterTesting(e)
-            print(a.get_comments())
             answers = ['What value do you want for 1&#47;0? For 0&#47;0, any value at all makes some sense (because x&#47;y==z still implies z**y==x), but for anything else divided by 0, no value makes sense (unless you have an infinite integer, and define infinity*0 == 0).', 'There is an error in your logic if you come across a situation where you are dividing by zero.']
 
             self.assertEqual(a.get_comments(),
                              answers)
+
+    def test_get_answers(self):
+        a = 1
+        try:
+            a.append("0")
+        except Exception as e:
+            a = getterTesting(e)
+            answers = ["Catch the error and handle it:\ntry:\n    z = x / y\nexcept ZeroDivisionError:\n    "
+                       "z = 0\n\nOr check before you do the division:\nif y == 0:\n    z = 0\nelse:\n    "
+                       "z = x / y\n\nThe latter can be reduced to:\nz = 0 if y == 0 else (x / y) \n\n"
+                       "Or if you're sure y is a number, which implies it`s truthy if nonzero:"
+                       "\nz = (x / y) if y else 0\nz = y and (x / y)   # alternate version",
+
+                       "# we are dividing until correct data is given\nexecuted = False\nwhile not executed:"
+                       "\n    try:\n        a = float(input('first number --&gt; '))\n       "
+                       " b = float(input('second number --&gt; '))\n        z = a / b\n       "
+                       " print(z)\n        executed = True\n    except ArithmeticError as arithmeticError:"
+                       "\n        print(arithmeticError)\n    except ValueError as valueError:\n        "
+                       "print(valueError)\n    except Exception as exception:\n        print(exception)"]
+            self.assertEqual(a.get_answers(),
+                             answers)
+
+    def test_get_answer(self):
+        a = 1
+        try:
+            a.append("0")
+        except Exception as e:
+            a = getterTesting(e)
+            print([a.get_answer()])
+            answer = "Catch the error and handle it:\ntry:\n    z = x / y\nexcept ZeroDivisionError:\n    z = 0" \
+                     "\n\nOr check before you do the division:\nif y == 0:\n    z = 0\nelse:\n    z = x / y" \
+                     "\n\nThe latter can be reduced to:\nz = 0 if y == 0 else (x / y) " \
+                     "\n\nOr if you're sure y is a number, which implies it`s truthy if nonzero:" \
+                     "\nz = (x / y) if y else 0\nz = y and (x / y)   # alternate version"
+            self.assertEqual(a.get_answer(),
+                             answer)
+
 
 
 class TestingApiConnection(unittest.TestCase):
@@ -87,10 +118,6 @@ class TestingApiConnection(unittest.TestCase):
             a = APITesting(e)
             self.assertTrue(a.meta_data)
             self.assertTrue(a.stack_data)
-
-    #todo implement
-    def test_search(self): #stack data, meta data
-        self.assertEqual(True, False)
 
 
 class TestingTraceback(unittest.TestCase):
@@ -126,11 +153,11 @@ class NullTest(unittest.TestCase):
             self.assertEqual(a.get_url(), "")
             self.assertEqual(a.get_title(), "")
             self.assertEqual(a.get_comments(), [])
+            self.assertEqual(a.get_answers(), [])
             self.assertEqual(a.get_question(), "")
         # try:
         #     raise custom_error = "fadiuwhdaisjdawdawd"
 
-#todo add a nested try:catch: block test with two nested calls to StackOverflow()
 
 if __name__ == '__main__':
     unittest.main()

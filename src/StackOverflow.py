@@ -21,14 +21,13 @@ Queries StackOverflow using their API, meaning that many subsequent calls will r
 
 
 class StackOverflowAPI():
-    #todo fix the bug where nesting try catch with StackOverflowAPI() calls breaks the whole thing
     def __init__(self, exception):
         self.API_URL = "https://api.stackexchange.com/2.2/"
         self.meta_data = {}
         self.stack_data = {}
         exc_type, exc_value, exc_tb = sys.exc_info()
         tb = traceback.TracebackException(exc_type, exc_value, exc_tb)
-        if tb.exc_type is None:
+        if tb.exc_type is None: #this only triggers if no exception is actually being raised.
             warnings.warn("Currently no exception being raised", RuntimeWarning)
             return
         self.search(''.join(tb.format_exception_only()))
@@ -43,15 +42,20 @@ class StackOverflowAPI():
     #                       might search stack overflow on the website.
     # PARAMS: post_chosen, a search string will most likely return more than one post, which post should be selected
     #                      is decided based on the priority that they are returned in the Stackoverflow API
-    #todo add some more parameters to increase flexibility and ease of extension\
-    def search(self, search_string, post_chosen=0):
+    # PARAMS: tags: search tags applied to the API call, default="python" this library is designed for python
+    # PARAMS: order: the order in which answers and posts are displayed, possible values: "desc" "asc"
+    # PARAMS: sorting: how the answers and posts are sorted,
+    #                   possible values: "activity", "votes", "creation", "relevance". Default = "votes"
+    # PARAMS: site: the stackexchange site to search, default = stackoverflow
+    # for more API info see: https://api.stackexchange.com/docs
+    def search(self, search_string, post_chosen=0, tags="python", order="desc", sorting="votes", site="stackoverflow"):
         url = self.API_URL + "search"
         params = {
-            "site": "stackoverflow",
+            "site": site,
             "intitle": search_string,
-            "order": "desc",
-            "sort": "votes",
-            "tagged": "python",
+            "order": order,
+            "sort": sorting,
+            "tagged": tags,
             "filter": "!-MBrU_IzpJ5H-AG6Bbzy.X-BYQe(2v-.J"
         }
         try:
@@ -62,7 +66,7 @@ class StackOverflowAPI():
         self.meta_data = {"Status Code": r.status_code, "API URL": r.url, "HEADERS": r.headers}
         #checking if stackexchange api actually gave us a question/answer with a link, if not, expand the search
         if "items" in json.loads(r.content).keys() and len(list(json.loads(r.content)['items'])) > 0:
-            self.stack_data = list(json.loads(r.content)['items'])[0]
+            self.stack_data = list(json.loads(r.content)['items'])[post_chosen]
         else:
             #we are now expanding our search using looser parameters, this will return more general results
             url = self.API_URL + "similar"
@@ -115,11 +119,23 @@ class StackOverflowAPI():
         return []
 
     #returns the highest voted answer on the question searched.
-    #todo make it possible to return the second highest voted answer or the third not just the first
+    #@throws: an out of index error if index > # of answers on the post.
     def get_answer(self):
         if self.stack_data:
             return self._cleanhtml_(self.stack_data["answers"][0]["body"])
         return ""
+
+    #returns all answers on the post in decending order of votes.
+    #Returns empty array if StackOverflow API was unable to find a post for the error code.
+    def get_answers(self):
+
+        if self.stack_data:
+            answers = []
+            for answer_info in self.stack_data["answers"]:
+                answer = answer_info["body"]
+                answers.append(self._cleanhtml_(answer))
+            return answers
+        return []
 
     # returns a dictionary of meta data about the API request including:
     # the request Status code: 200/404/ect
