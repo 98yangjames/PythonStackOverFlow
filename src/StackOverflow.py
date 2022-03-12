@@ -27,7 +27,7 @@ class StackOverflowAPI():
         self.search(''.join(tb.format_exception_only()))
         raise type(exception)("\n \033[93m ----STACK OVERFLOW INFORMATION FROM LOOKUP----\033[0m \n " +
                               "\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" +
-                              "\033[93m QUESTION ASKED:\033[0m \n " + self.get_question() + "\033[0m \n"+
+                              "\033[93m QUESTION ASKED:\033[0m \n " + self.get_question() + "\033[0m \n" +
                               "\033[93m ANSWER GIVEN: \033[0m \n" + self.get_answer() + "\033[0m \n") from exception
 
     # calls the stackoverflow API to find posts that include a given search string, then chooses the post_chosen'th
@@ -58,11 +58,11 @@ class StackOverflowAPI():
             print("The attempt to request data from the StackExchange API has failed, check your internet connection.")
             return
         self.meta_data = {"Status Code": r.status_code, "API URL": r.url, "HEADERS": r.headers}
-        #checking if stackexchange api actually gave us a question/answer with a link, if not, expand the search
+        # checking if stackexchange api actually gave us a question/answer with a link, if not, expand the search
         if "items" in json.loads(r.content).keys() and len(list(json.loads(r.content)['items'])) > 0:
             self.stack_data = list(json.loads(r.content)['items'])[post_chosen]
         else:
-            #we are now expanding our search using looser parameters, this will return more general results
+            # we are now expanding our search using looser parameters, this will return more general results
             url = self.API_URL + "similar"
             params = {
                 "site": "stackoverflow",
@@ -110,15 +110,15 @@ class StackOverflowAPI():
             return comments
         return []
 
-    #returns the highest voted answer on the question searched.
-    #@throws: an out of index error if index > # of answers on the post.
+    # returns the highest voted answer on the question searched.
+    # @throws: an out of index error if index > # of answers on the post.
     def get_answer(self):
         if self.stack_data:
             return self._cleanhtml_(self.stack_data["answers"][0]["body"])
         return ""
 
-    #returns all answers on the post in decending order of votes.
-    #Returns empty array if StackOverflow API was unable to find a post for the error code.
+    # returns all answers on the post in decending order of votes.
+    # Returns empty array if StackOverflow API was unable to find a post for the error code.
     def get_answers(self):
 
         if self.stack_data:
@@ -142,7 +142,7 @@ class StackOverflowAPI():
     def _cleanhtml_(self, raw_html, cleaner=re.compile('<.*?>')):
         return re.sub(cleaner, '', raw_html).strip()
 
-    #if this object is printed, it will simply print into the console the exact same error code it raises upon init
+    # if this object is printed, it will simply print into the console the exact same error code it raises upon init
     def __print__(self):
         return "\n \033[93m ----STACK OVERFLOW INFORMATION FROM LOOKUP----\033[0m \n " +\
                               "\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" +\
