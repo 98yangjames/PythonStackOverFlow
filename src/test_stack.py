@@ -77,7 +77,6 @@ class TestingGetters(unittest.TestCase):
             a = getterTesting(e)
             self.assertEqual(a.get_url(), "https://stackoverflow.com/questions/29836964/error-python-zerodivisionerror-division-by-zero")
 
-
     def test_get_comments(self):
         a = 1
         try:
@@ -192,4 +191,3 @@ class NullTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    
