@@ -1,5 +1,5 @@
-import unittest
 from src import StackOverflow
+import unittest
 import traceback
 import sys
 import warnings
@@ -102,7 +102,8 @@ class getterTesting(StackOverflow.StackOverflowAPI):
                            'view_count': 113396, 'favorite_count': 5, 'accepted_answer_id': 29836987, 'answer_count': 2,
                            'score': 23, 'last_activity_date': 1637275638, 'creation_date': 1429837466,
                            'last_edit_date': 1618712260, 'question_id': 29836964,
-                           'link': 'https://stackoverflow.com/questions/29836964/error-python-zerodivisionerror-division-by-zero',
+                           'link': 'https://stackoverflow.com/questions/29836964/'
+                                   'error-python-zerodivisionerror-division-by-zero',
                            'title': 'Error python : [ZeroDivisionError: division by zero]',
                            'body': '<p>I faced an error when I run my program using python:\n'
                                    'The error is like this:</p>\n<pre><code>ZeroDivisionError: division'
@@ -161,7 +162,9 @@ class TestingGetters(unittest.TestCase):
         except Exception:
             a = getterTesting()
             answers = [
-                'What value do you want for 1&#47;0? For 0&#47;0, any value at all makes some sense (because x&#47;y==z still implies z**y==x), but for anything else divided by 0, no value makes sense (unless you have an infinite integer, and define infinity*0 == 0).',
+                'What value do you want for 1&#47;0? For 0&#47;0, any value at all makes some sense (because x&#47;'
+                'y==z still implies z**y==x), but for anything else divided by 0, no value makes sense '
+                '(unless you have an infinite integer, and define infinity*0 == 0).',
                 'There is an error in your logic if you come across a situation where you are dividing by zero.']
 
             self.assertEqual(a.get_comments(),
@@ -245,8 +248,9 @@ class NullTest(unittest.TestCase):
         StackOverflow.StackOverflowAPI(BaseException)
         self.assertEqual(True, True)
 
-    # this test creates a custom error which definitely does not exist in stack overflow, this way the API will come up
-    # blank when called with the error code. In this scenario we want our file to fail gracefully, allow the error
+    # this test creates a custom error which definitely does not exist in stack overflow,
+    # this way the API will come up blank when called with the error code.
+    # In this scenario we want our file to fail gracefully, allow the error
     # to pop up as is, with all getters returning empty results and not causing crashes.
     def test_no_stack_all_empty_getters(self):
         class pbaspdibfgapsdsjdbg_error(Exception):
@@ -254,7 +258,7 @@ class NullTest(unittest.TestCase):
 
         try:
             raise pbaspdibfgapsdsjdbg_error()
-        except Exception :
+        except Exception:
             a = APITesting()
             self.assertEqual(a.get_answer(), "")
             self.assertEqual(a.get_url(), "")
