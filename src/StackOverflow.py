@@ -31,10 +31,10 @@ class StackOverflowAPI():
             warnings.warn("Currently no exception being raised", RuntimeWarning)
             return
         self.search(''.join(tb.format_exception_only()))
-        raise type(exception)("\n \033[93m ----STACK OVERFLOW INFORMATION FROM LOOKUP----\033[0m \n " 
-                              + "\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" 
-                              + "\033[93m QUESTION ASKED:\033[0m \n " + self.get_question() + "\033[0m \n"
-                              + "\033[93m ANSWER GIVEN: \033[0m \n" + self.get_answer() + "\033[0m \n") from exception
+        raise type(exception)("\n \033[93m ----STACK OVERFLOW INFORMATION FROM LOOKUP----\033[0m \n " +
+                              "\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" +
+                              "\033[93m QUESTION ASKED:\033[0m \n " + self.get_question() + "\033[0m \n"+
+                              "\033[93m ANSWER GIVEN: \033[0m \n" + self.get_answer() + "\033[0m \n") from exception
 
     # calls the stackoverflow API to find posts that include a given search string, then chooses the post_chosen'th
     # post to save information and meta data on.
@@ -151,6 +151,6 @@ class StackOverflowAPI():
     #if this object is printed, it will simply print into the console the exact same error code it raises upon init
     def __print__(self):
         return "\n \033[93m ----STACK OVERFLOW INFORMATION FROM LOOKUP----\033[0m \n " +\
-                              +"\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" \
-                              +"\033[93m QUESTION ASKED:\033[0m \n " + self.get_question() + "\033[0m \n" \
-                              +"\033[93m ANSWER GIVEN: \033[0m \n" + self.get_answer() + "\033[0m \n"
+                              "\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" +\
+                              "\033[93m QUESTION ASKED:\033[0m \n " + self.get_question() + "\033[0m \n" +\
+                              "\033[93m ANSWER GIVEN: \033[0m \n" + self.get_answer() + "\033[0m \n"
