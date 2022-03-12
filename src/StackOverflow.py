@@ -13,7 +13,7 @@ stack_data_keys = ['tags', 'comments', 'answers', 'owner', 'delete_vote_count', 
 
 
 '''
-This is a class which searches and returns information about queries to stack overflow. 
+This is a class which searches and returns information about queries to stack overflow.
 removing the need to search for things on a web browser by handling everything within the IDE
 
 Queries StackOverflow using their API, meaning that many subsequent calls will result in 24 hour ban from queries.
@@ -27,7 +27,7 @@ class StackOverflowAPI():
         self.stack_data = {}
         exc_type, exc_value, exc_tb = sys.exc_info()
         tb = traceback.TracebackException(exc_type, exc_value, exc_tb)
-        if tb.exc_type is None: #this only triggers if no exception is actually being raised.
+        if tb.exc_type is None:
             warnings.warn("Currently no exception being raised", RuntimeWarning)
             return
         self.search(''.join(tb.format_exception_only()))
@@ -60,7 +60,7 @@ class StackOverflowAPI():
         }
         try:
             r = requests.get(url, params=params)
-        except requests.exceptions.RequestException as e:
+        except requests.exceptions.RequestException:
             print("The attempt to request data from the StackExchange API has failed, check your internet connection.")
             return
         self.meta_data = {"Status Code": r.status_code, "API URL": r.url, "HEADERS": r.headers}
@@ -80,15 +80,13 @@ class StackOverflowAPI():
             }
             try:
                 r_similar = requests.get(url, params=params)
-            except requests.exceptions.RequestException as e:
-                print(
-                    "The attempt to request data from the StackExchange API has failed, check your internet connection.")
+            except requests.exceptions.RequestException:
+                print("The attempt to request data from the StackExchange API has failed")
                 return
             if "items" in json.loads(r_similar.content).keys() and list(json.loads(r_similar.content)['items']):
                 self.stack_data = list(json.loads(r_similar.content)['items'])[0]
             else:
                 self.stack_data = {}
-
 
     # gets the title to the post searched
     def get_title(self):
@@ -156,4 +154,3 @@ class StackOverflowAPI():
                               "\033[93m STACK OVERFLOW LINK: \033[0m" + self.get_url() + " \033[0m \n" +\
                               "\033[93m QUESTION ASKED:\033[0m \n " + self.get_question() + "\033[0m \n" +\
                               "\033[93m ANSWER GIVEN: \033[0m \n" + self.get_answer() + "\033[0m \n"
-
