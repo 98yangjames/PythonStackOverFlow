@@ -229,19 +229,6 @@ class TestingApiConnection(unittest.TestCase):
             self.assertTrue(a.stack_data)
 
 
-class TestingTraceback(unittest.TestCase):
-
-    # create some known error so that Stack Overflow can provide a solution within our traceback.
-    # no need to check any information beyond the URL to know we got what we expected.
-    def test_basic_pandas_error(self):
-
-        try:
-            pd.read_csv("notafile.csv")
-        except Exception:
-            a = APITesting()
-            self.assertEqual("How do I check whether a file exists without exceptions?", a.get_title())
-
-
 class NullTest(unittest.TestCase):
 
     def test_no_input(self):  # null values, try to call api with no error,
