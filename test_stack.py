@@ -1,4 +1,4 @@
-from src import StackOverflow
+import StackOverflow
 import unittest
 import traceback
 import sys
