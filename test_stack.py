@@ -3,7 +3,6 @@ import unittest
 import traceback
 import sys
 import warnings
-import pandas as pd
 
 """
 This is our StackOverflowAPI testing class
